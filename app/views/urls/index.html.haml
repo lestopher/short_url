@@ -1,0 +1,8 @@
+%div.row
+  %div.span.offset4
+    = form_tag new_url_path, :method => "post" do
+      = text_field_tag :url, nil, :placeholder => "Enter URL here (required)"
+      %br
+      = text_field_tag :custom_url, nil, :placeholder => "Custom URL (optional)"
+      %br
+      = submit_tag "Create!", :id => "submit-url-btn", :class => "btn"
