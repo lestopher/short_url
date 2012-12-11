@@ -1,8 +1,41 @@
+- if flash[:error]
+  %div.row
+    %p.error
+      = flash[:error]
+
+- if flash[:notice]
+  %div.row
+    %p.notice
+      = flash[:notice]
+
 %div.row
   %div.span.offset4
-    = form_tag new_url_path, :method => "post" do
+    = form_tag urls_path, :method => "post" do
       = text_field_tag :url, nil, :placeholder => "Enter URL here (required)"
       %br
       = text_field_tag :custom_url, nil, :placeholder => "Custom URL (optional)"
       %br
+      %label.checkbox{ :for => "force_cb"}
+        = check_box_tag "force_cb"
+        Force creation
+      %br
       = submit_tag "Create!", :id => "submit-url-btn", :class => "btn"
+
+- if @custom
+  %div.row
+    %table.table.table-striped
+      %thead
+        %tr
+          %th
+            URL
+          %th
+            Custom URL
+      %tbody
+      = @custom.each do |c|
+        %tr
+          %td
+            c.fu
+          %td
+            c.hu
+
+= debug(params) if Rails.env.development?
