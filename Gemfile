@@ -4,9 +4,12 @@ gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-  # gem 'ruby-debug19', :require => 'ruby-debug'
+group :development do
+  gem 'debugger'
+  gem 'mongoid'
+end
 
-group :development, :test, :production do
+group :test, :production do
   gem 'mongoid'
 end
 
