@@ -1,0 +1,14 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+        URL
+      %th
+        Custom URL
+      %tbody
+        - @records.each do |r|
+          %tr
+            %td
+              = r.full_url
+            %td
+              = r.hashed_url

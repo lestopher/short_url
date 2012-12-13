@@ -9,11 +9,11 @@
       = flash[:notice]
 
 %div.row
-  %div.span.offset4
+  %div.span8.offset2
     = form_tag urls_path, :method => "post" do
-      = text_field_tag :url, nil, :placeholder => "Enter URL here (required)"
+      = text_field_tag :url, nil, :placeholder => "Enter URL here (required)", :class => "input-xlarge"
       %br
-      = text_field_tag :custom_url, nil, :placeholder => "Custom URL (optional)"
+      = text_field_tag :custom_url, nil, :placeholder => "Custom URL (optional)", :class => "input-xlarge"
       %br
       %label.checkbox{ :for => "force_cb"}
         = check_box_tag "force_cb"
@@ -21,21 +21,7 @@
       %br
       = submit_tag "Create!", :id => "submit-url-btn", :class => "btn"
 
-- if @custom
+- if @records && !@records.empty?
   %div.row
-    %table.table.table-striped
-      %thead
-        %tr
-          %th
-            URL
-          %th
-            Custom URL
-      %tbody
-      = @custom.each do |c|
-        %tr
-          %td
-            c.fu
-          %td
-            c.hu
-
-= debug(params) if Rails.env.development?
+    %div.span8.offset2
+      = render 'urls/table_results'
