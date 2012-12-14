@@ -23,11 +23,12 @@ class UrlsController < ApplicationController
   end
 
   def show
-    if params[:url].nil?
-      @records = Url.all.to_a
-    else
-      @records = Url.where(:hashed_url => params[:url]).to_a
-    end
+    @records = Url.where(:hashed_url => params[:url]).to_a
+  end
+
+  def all
+    @records = Url.all.to_a
+    render 'urls/show'
   end
 
   def new
@@ -45,7 +46,7 @@ class UrlsController < ApplicationController
     custom_url = !params[:custom_url].empty? ? params[:custom_url] : Url.create_hashed_url(params[:url])
     msg        = Url.check_options(url, custom_url)
 
-    if msg[:url][:count] > 0 && params[:force_cb] != 1
+    if msg[:url][:count] > 0 && params[:force_cb].to_i != 1
       flash[:notice] = "There are currently #{msg[:url][:count]} instances of the url #{url} in use, please consider using one of the following:"
       @records = msg[:url][:data]
       redirect_to root_path :used_url => url
@@ -60,7 +61,7 @@ class UrlsController < ApplicationController
 
     url_obj = Url.create(full_url: url, hashed_url: custom_url)
 
-    redirect_to root_path, :notice => "Successfully created custom url: http://evi.io/#{custom_url}"
+    redirect_to root_path, :notice => "Successfully created custom url: http://#{site_name}/#{custom_url}"
   end
 
   def edit

@@ -6,7 +6,8 @@ ShortUrl::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
   resources :urls
-  match 'show/:url' => 'urls#show'
+  match '/all' => 'urls#all', :as => :all
+  # match '/urls/:url' => 'urls#show', :as => :list
   match '/:url' => 'urls#index'
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
