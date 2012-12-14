@@ -1,15 +1,17 @@
 - if flash[:error]
   %div.row
-    %p.error
-      = flash[:error]
+    %div.span8.offset2
+      %p.error
+        = flash[:error]
 
 - if flash[:notice]
   %div.row
-    %p.notice
-      = flash[:notice]
+    %div.span8.offset2
+      %p.notice
+        = flash[:notice]
 
 %div.row
-  %div.span8.offset2
+  %div.span8.offset4
     = form_tag urls_path, :method => "post" do
       = text_field_tag :url, nil, :placeholder => "Enter URL here (required)", :class => "input-xlarge"
       %br
