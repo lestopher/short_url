@@ -27,7 +27,9 @@ class UrlsController < ApplicationController
   end
 
   def all
-    @records = Url.all.to_a
+    @records = Url.all
+
+    @records = @records.to_a if @records.respond_to? 'to_a'
     render 'urls/show'
   end
 
