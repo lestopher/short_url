@@ -45,6 +45,7 @@ class UrlsController < ApplicationController
     url        = params[:url]
     custom_url = !params[:custom_url].empty? ? params[:custom_url] : Url.create_hashed_url(params[:url])
     msg        = Url.check_options(url, custom_url)
+    site_name  = request.host
 
     if msg[:url][:count] > 0 && params[:force_cb].to_i != 1
       flash[:notice] = "There are currently #{msg[:url][:count]} instances of the url #{url} in use, please consider using one of the following:"
