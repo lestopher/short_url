@@ -11,5 +11,5 @@
             %td
               = r.full_url
             %td
-              %a{:href => "http://#{site_name}/#{r.hashed_url}"}
+              %a{:href => root_path + r.hashed_url}
                 = r.hashed_url

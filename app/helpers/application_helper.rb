@@ -1,6 +1,6 @@
 module ApplicationHelper
   def site_name
-    return "localhost:3000"
+    return root_path
   end
 
   def current_controller
