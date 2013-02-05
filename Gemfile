@@ -31,6 +31,9 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'thin'
 
+# Needed for New Relic heroku add-on
+gem 'newrelic_rpm'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
