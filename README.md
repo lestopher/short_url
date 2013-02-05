@@ -18,7 +18,8 @@ rails s
 ## Caveat
 
 You'll notice that there are some gems in the Gemfile that pertain to Heroku use. Comment them out if it pleases you.  
-  
+
+You'll notice that one of the gems required is therubyracer, which uses Google's V8 javascript engine. There's currently no Windows version, so unless you do some tweaking, this won't run on Windows.
 
 
 ## To do
