@@ -16,3 +16,6 @@
 
 # .env file is for the purposes of development and heroku
 .env
+
+# ignore vim backup files
+*~
