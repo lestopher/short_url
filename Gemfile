@@ -29,6 +29,8 @@ end
 
 gem 'jquery-rails'
 gem 'haml'
+
+# heroku use
 gem 'thin'
 
 # Needed for New Relic heroku add-on
