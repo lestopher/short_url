@@ -5,6 +5,8 @@
         URL
       %th
         Custom URL
+      %th
+        Times Visited
       %tbody
         - @records.each do |r|
           %tr
@@ -13,3 +15,5 @@
             %td
               %a{:href => root_path + r.hashed_url}
                 = r.hashed_url
+            %td 
+              = r.times_visited || 0

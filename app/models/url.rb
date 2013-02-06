@@ -7,13 +7,26 @@ class Url
   field :cb, as: :created_by, type: String
   field :cd, as: :created_date, type: DateTime, default: ->{ Time.now }
   field :rn, as: :record_number, type: Integer
+  field :tv, as: :times_visited, type: Integer
 
   # Do this before save
   before_save :set_record_number
 
   # Adds record number to the document
   def set_record_number
+    return if self.record_number != nil
     self.record_number = Url.count + 1
+  end
+
+  # Updates the number of times visited
+  def update_times_visited
+    if self.times_visited.nil? || self.times_visited < 1
+      self.times_visited = 1
+    else
+      self.times_visited += 1
+    end
+
+    save
   end
 
   def self.create_hashed_url(url)
