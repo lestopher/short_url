@@ -19,7 +19,7 @@ class UrlsController < ApplicationController
 
     # This section deals with redirecting to a url if it's found
     protocol = "http://" if document.full_url.match(/^(https|http):\/\//).nil?
-    redirect_to "#{protocol}#{document.full_url}" and return
+    redirect_to "#{protocol}#{document.full_url}", :status => 301 and return
   end
 
   def show
