@@ -1,0 +1,12 @@
+.row
+  %h1
+    Editing
+    = @record.hashed_url
+.row
+  .span8.offset4
+    = form_tag urls_path, :method => "post" do
+      = text_field_tag :url, nil, :placeholder => "Enter URL here (required)", :class => "input-xlarge"
+      %br
+      = text_field_tag :custom_url, nil, :placeholder => "Custom URL (optional)", :class => "input-xlarge"
+      %br
+      = submit_tag "Update!", :id => "submit-url-btn", :class => "btn"

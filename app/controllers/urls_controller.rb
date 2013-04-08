@@ -69,10 +69,16 @@ class UrlsController < ApplicationController
 
     url_obj = Url.create(full_url: url, hashed_url: custom_url)
 
-    redirect_to root_path, :notice => "Successfully created custom url: http://#{site_name}/#{custom_url}\nYour admin url is http://#{site_name}/#{url_obj.admin_hash}"
+    redirect_to root_path, :notice => "Successfully created custom url: http://#{site_name}/#{custom_url}\nYour admin url is http://#{site_name}/#{url_obj.admin_hash}/edit"
   end
 
   def edit
+    @record = Url.where(:admin_hash => params[:id]).to_a
+
+    redirect_to(urls_path, { :error => "No edit path exists for that URL." }) and return if @record.nil?
+  end
+
+  def update
   end
 
   def delete
