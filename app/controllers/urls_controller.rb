@@ -75,7 +75,7 @@ class UrlsController < ApplicationController
   def edit
     @record = Url.where(:admin_hash => params[:id]).to_a
 
-    redirect_to(urls_path, { :error => "No edit path exists for that URL." }) and return if @record.nil?
+    redirect_to(urls_path, { :error => "No edit path exists for that URL." }) and return if @record.empty?
 
     @record = @record.first
   end
@@ -86,8 +86,10 @@ class UrlsController < ApplicationController
   def destroy
     @record = Url.where(:admin_hash => params[:admin_hash]).to_a
 
-    if @record != nil
-      @record[0].destroy
+    if !@record.empty?
+      @record.first.destroy
     end
+
+    redirect_to root_path, :error => "#{params[:admin_hash]} was not found."
   end
 end
