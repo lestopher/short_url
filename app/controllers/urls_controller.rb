@@ -76,6 +76,8 @@ class UrlsController < ApplicationController
     @record = Url.where(:admin_hash => params[:id]).to_a
 
     redirect_to(urls_path, { :error => "No edit path exists for that URL." }) and return if @record.nil?
+
+    @record = @record.first
   end
 
   def update

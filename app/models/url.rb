@@ -22,7 +22,7 @@ class Url
   def create_admin_hash
     return if self.admin_hash != nil
     require 'base64'
-    self.admin_hash = Base64.urlsafe_encode64(self.full_url + self.created_date + Random.rand(99))
+    self.admin_hash = Base64.urlsafe_encode64(self.full_url + self.created_date.to_s + Random.rand(99).to_s)
   end
 
   # Updates the number of times visited
