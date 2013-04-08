@@ -69,7 +69,7 @@ class UrlsController < ApplicationController
 
     url_obj = Url.create(full_url: url, hashed_url: custom_url)
 
-    redirect_to root_path, :notice => "Successfully created custom url: http://#{site_name}/#{custom_url}\nYour admin url is http://#{site_name}/#{url_obj.admin_hash}/edit"
+    redirect_to root_path, :notice => "Successfully created custom url: http://#{site_name}/#{custom_url}<br/>Your admin url is http://#{site_name}/urls/#{url_obj.admin_hash}/edit"
   end
 
   def edit
@@ -83,6 +83,11 @@ class UrlsController < ApplicationController
   def update
   end
 
-  def delete
+  def destroy
+    @record = Url.where(:admin_hash => params[:admin_hash]).to_a
+
+    if @record != nil
+      @record[0].destroy
+    end
   end
 end

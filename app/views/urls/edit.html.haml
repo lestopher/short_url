@@ -3,9 +3,10 @@
     %h1
       Editing
       = @record.hashed_url
-    = form_tag urls_path, :method => "put" do
+    = form_tag urls_path, :method => "delete" do
       = text_field_tag :url, nil, :value => @record.full_url, :class => "input-xlarge"
       %br
       = text_field_tag :custom_url, nil, :value => @record.hashed_url, :class => "input-xlarge"
       %br
-      = submit_tag "Update!", :id => "submit-url-btn", :class => "btn"
+      = hidden_field_tag :admin_hash, @record.admin_hash
+      = submit_tag "Delete!", :id => "delete-url-btn", :class => "btn btn-danger"
