@@ -69,7 +69,7 @@ class UrlsController < ApplicationController
 
     url_obj = Url.create(full_url: url, hashed_url: custom_url)
 
-    redirect_to root_path, :notice => "Successfully created custom url: http://#{site_name}/#{custom_url}"
+    redirect_to root_path, :notice => "Successfully created custom url: http://#{site_name}/#{custom_url}\nYour admin url is http://#{site_name}/#{url_obj.admin_hash}"
   end
 
   def edit

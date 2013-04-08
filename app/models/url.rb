@@ -8,14 +8,21 @@ class Url
   field :cd, as: :created_date, type: DateTime, default: ->{ Time.now }
   field :rn, as: :record_number, type: Integer
   field :tv, as: :times_visited, type: Integer
+  field :ah, as: :admin_hash, type: String
 
   # Do this before save
-  before_save :set_record_number
+  before_save :set_record_number, :create_admin_hash
 
   # Adds record number to the document
   def set_record_number
     return if self.record_number != nil
     self.record_number = Url.count + 1
+  end
+
+  def create_admin_hash
+    return if self.admin_hash != nil
+    require 'base64'
+    self.admin_hash = Base64.urlsafe_encode64(self.full_url + self.created_date + Random.rand(99))
   end
 
   # Updates the number of times visited
