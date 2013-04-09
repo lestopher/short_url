@@ -14,8 +14,8 @@ class Url
   before_save :set_record_number, :create_admin_hash
 
   # Banned custom urls array
-  BANNED = %w(url, urls, show, fuck, ass, shit, cunt, pussy, all, new, delete,
-             destroy, index, create, edit, update).freeze
+  BANNED = %w(url urls show fuck ass shit cunt pussy all new delete
+             destroy index create edit update).freeze
   
   # Adds record number to the document
   def set_record_number
