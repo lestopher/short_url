@@ -13,6 +13,10 @@ class Url
   # Do this before save
   before_save :set_record_number, :create_admin_hash
 
+  # Banned custom urls array
+  BANNED = %w(url, urls, show, fuck, ass, shit, cunt, pussy, all, new, delete,
+             destroy, index, create, edit, update).freeze
+  
   # Adds record number to the document
   def set_record_number
     return if self.record_number != nil
@@ -41,16 +45,26 @@ class Url
     return Zlib::crc32 url
   end
 
-  def self.check_options(url, custom_url)
-    msg = { :url => {} }
-
+  def self.check_options(url, customUrl)
+    msg         = { :url => {} }
     url_results = self.where(:full_url => url)
-    custom_url  = self.where(:hashed_url => custom_url)
+    customUrl   = self.where(:hashed_url => customUrl)
 
     msg[:url][:data]  =  url_results.to_a
     msg[:url][:count] =  url_results.count
-    msg[:custom_url]  =  custom_url.exists?
+    msg[:custom_url]  =  customUrl.exists?
 
     return msg
+  end
+
+  def self.is_banned?(customUrl)
+    special = "?<>',?[]}{=-)(*&^%$#`~{}/\\"
+    regex   = /[#{special.gsub(/./){|char| "\\#{char}"}}]/
+
+    if self.BANNED.include?(customUrl) or customUrl =~ regex
+      return true
+    else
+      return false
+    end
   end
 end

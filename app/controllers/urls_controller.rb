@@ -45,14 +45,18 @@ class UrlsController < ApplicationController
     # C'mon son, you need at least a url to get started
     if params[:url].length == 0
       flash[:error] = "You need to enter a URL at the minimum."
-      redirect_to root_path
-      return
+      redirect_to root_path and return
     end
 
     url        = params[:url]
-    custom_url = !params[:custom_url].empty? ? params[:custom_url] : Url.create_hashed_url(params[:url])
+    custom_url = !params[:custom_url].empty? ? params[:custom_url].downcase : Url.create_hashed_url(params[:url])
     msg        = Url.check_options(url, custom_url)
     site_name  = request.host_with_port
+
+    # Check if the custom url is banned
+    if Url.is_banned?(custom_url)
+      redirect_to root_path, :error => "You may not use special characters or swear words in your custom url" and return
+    end
 
     if msg[:url][:count] > 0 && params[:force_cb].to_i != 1
       flash[:notice] = "There are currently #{msg[:url][:count]} instances of the url #{url} in use, please consider using one of the following:"
