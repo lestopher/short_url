@@ -15,16 +15,17 @@
         %br
 
 %div.row
-  = form_tag urls_path, :method => "post" do
-    = text_field_tag :url, nil, :placeholder => "Enter URL here (required)", :class => "input-xlarge"
-    %br
-    = text_field_tag :custom_url, nil, :placeholder => "Custom URL (optional)", :class => "input-xlarge"
-    %br
-    %label.checkbox{ :for => "force_cb"}
-      = check_box_tag "force_cb"
-      Force creation
-    %br
-    = submit_tag "Create!", :id => "submit-url-btn", :class => "btn"
+  .well.span4
+    = form_tag urls_path, :method => "post" do
+      = text_field_tag :url, nil, :placeholder => "Enter URL here (required)", :class => "input-xlarge"
+      %br
+      = text_field_tag :custom_url, nil, :placeholder => "Custom URL (optional)", :class => "input-xlarge"
+      %br
+      %label.checkbox{ :for => "force_cb"}
+        = check_box_tag "force_cb"
+        Force creation
+      %br
+      = submit_tag "Create!", :id => "submit-url-btn", :class => "btn btn-large btn-info"
 
 - if @records && !@records.empty?
   %div.row

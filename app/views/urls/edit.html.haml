@@ -1,11 +1,13 @@
 .row
   %h1
-    Editing
-    = @record.hashed_url
-  = form_tag urls_path, :method => "post" do
-    = text_field_tag :url, nil, :value => @record.full_url, :class => "input-xlarge"
-    %br
-    = text_field_tag :custom_url, nil, :value => @record.hashed_url, :class => "input-xlarge"
-    %br
-    = hidden_field_tag :admin_hash, @record.admin_hash
-    = link_to "Delete!", @record, :id => "delete-url-btn", :class => "btn btn-danger", :method => :delete
+    Delete
+    %em
+      ==#{@record.hashed_url}?
+  .well.span4
+    = form_tag urls_path, :method => "post" do
+      = text_field_tag :url, nil, :value => @record.full_url, :class => "input-xlarge"
+      %br
+      = text_field_tag :custom_url, nil, :value => @record.hashed_url, :class => "input-xlarge"
+      %br
+      = hidden_field_tag :admin_hash, @record.admin_hash
+      = link_to "Delete!", @record, :id => "delete-url-btn", :class => "btn btn-large btn-danger", :method => :delete
