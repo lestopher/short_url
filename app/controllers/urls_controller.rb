@@ -52,7 +52,7 @@ class UrlsController < ApplicationController
     url        = params[:url]
     custom_url = !params[:custom_url].empty? ? params[:custom_url] : Url.create_hashed_url(params[:url])
     msg        = Url.check_options(url, custom_url)
-    site_name  = request.host
+    site_name  = request.host_with_port
 
     if msg[:url][:count] > 0 && params[:force_cb].to_i != 1
       flash[:notice] = "There are currently #{msg[:url][:count]} instances of the url #{url} in use, please consider using one of the following:"
@@ -69,7 +69,7 @@ class UrlsController < ApplicationController
 
     url_obj = Url.create(full_url: url, hashed_url: custom_url)
 
-    redirect_to root_path, :notice => "Successfully created custom url: http://#{site_name}/#{custom_url}<br/>Your admin url is http://#{site_name}/urls/#{url_obj.admin_hash}/edit"
+    redirect_to root_path, :notice => "Successfully created custom url: http://#{site_name}/#{custom_url}/nYour admin url is http://#{site_name}/urls/#{url_obj.admin_hash}/edit"
   end
 
   def edit
