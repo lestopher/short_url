@@ -1,13 +1,17 @@
 - if flash[:error]
   %div.row
     %div.span8.offset2
-      %p.error
+      .alert.alert-error
+        %a.close{ :data => { :dismiss => "alert" } }
+          &times;
         = flash[:error]
 
 - if flash[:notice]
   %div.row
     %div.span8.offset2
-      %p.notice
+      .alert.alert-success
+        %a.close{ :data => { :dismiss => "alert" } }
+          &times;
         = flash[:notice]
 
 %div.row

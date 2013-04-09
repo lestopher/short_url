@@ -86,9 +86,7 @@ class UrlsController < ApplicationController
   def destroy
     @record = Url.where(:admin_hash => params[:admin_hash]).to_a
 
-    if !@record.empty?
-      @record.first.destroy
-    end
+    @record.first.destroy and redirect_to root_path, :notice => "Successfully deleted link" unless @record.empty?
 
     redirect_to root_path, :error => "#{params[:admin_hash]} was not found."
   end
