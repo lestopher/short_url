@@ -12,7 +12,7 @@
       .alert.alert-success
         %a.close{ :data => { :dismiss => "alert" } }
           &times;
-        = flash[:notice].split(/\/n/).each do |m|
+        - flash[:notice].split(/\/n/).each do |m|
           = m
           %br
 
