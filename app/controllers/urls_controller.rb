@@ -55,7 +55,8 @@ class UrlsController < ApplicationController
 
     # Check if the custom url is banned
     if Url.is_banned?(custom_url)
-      redirect_to root_path, :error => "You may not use special characters or swear words in your custom url" and return
+      flash[:error] = "You may not use special characters or swear words in your custom url"
+      redirect_to root_path and return
     end
 
     if msg[:url][:count] > 0 && params[:force_cb].to_i != 1

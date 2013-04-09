@@ -1,35 +1,31 @@
 - if flash[:error]
   %div.row
-    %div.span8.offset2
-      .alert.alert-error
-        %a.close{ :data => { :dismiss => "alert" } }
-          &times;
-        = flash[:error]
+    .alert.alert-error
+      %a.close{ :data => { :dismiss => "alert" } }
+        &times;
+      = flash[:error]
 
 - if flash[:notice]
   %div.row
-    %div.span8.offset2
-      .alert.alert-success
-        %a.close{ :data => { :dismiss => "alert" } }
-          &times;
-        - flash[:notice].split(/\/n/).each do |m|
-          = m
-          %br
+    .alert.alert-success
+      %a.close{ :data => { :dismiss => "alert" } }
+        &times;
+      - flash[:notice].split(/\/n/).each do |m|
+        = m
+        %br
 
 %div.row
-  %div.span8.offset4
-    = form_tag urls_path, :method => "post" do
-      = text_field_tag :url, nil, :placeholder => "Enter URL here (required)", :class => "input-xlarge"
-      %br
-      = text_field_tag :custom_url, nil, :placeholder => "Custom URL (optional)", :class => "input-xlarge"
-      %br
-      %label.checkbox{ :for => "force_cb"}
-        = check_box_tag "force_cb"
-        Force creation
-      %br
-      = submit_tag "Create!", :id => "submit-url-btn", :class => "btn"
+  = form_tag urls_path, :method => "post" do
+    = text_field_tag :url, nil, :placeholder => "Enter URL here (required)", :class => "input-xlarge"
+    %br
+    = text_field_tag :custom_url, nil, :placeholder => "Custom URL (optional)", :class => "input-xlarge"
+    %br
+    %label.checkbox{ :for => "force_cb"}
+      = check_box_tag "force_cb"
+      Force creation
+    %br
+    = submit_tag "Create!", :id => "submit-url-btn", :class => "btn"
 
 - if @records && !@records.empty?
   %div.row
-    %div.span8.offset2
-      = render 'urls/table_results'
+    = render 'urls/table_results'
