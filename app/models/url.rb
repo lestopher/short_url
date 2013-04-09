@@ -61,7 +61,7 @@ class Url
     special = "?<>',?[]}{=-)(*&^%$#`~{}/\\"
     regex   = /[#{special.gsub(/./){|char| "\\#{char}"}}]/
 
-    if self.BANNED.include?(customUrl) or customUrl =~ regex
+    if BANNED.include?(customUrl) or customUrl =~ regex
       return true
     else
       return false
