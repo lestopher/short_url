@@ -87,14 +87,14 @@ class UrlsController < ApplicationController
 
   # The only thing that we allow them to update, will be the url, not the custom url
   def update
-    @record = Url.where(:id => params[:id]).to_a
+    @record = Url.where(:admin_hash => params[:id]).to_a
 
     if @record.empty?
       flash[:error] = "Could not update custom url with new link"
       redirect_to root_path and return
     end
 
-    @record.update_attributes( :full_url => params[:url])
+    @record.first.update_attributes( :full_url => params[:url])
     flash[:notice] = "Successfully updated link"
     redirect_to root_path and return
   end
