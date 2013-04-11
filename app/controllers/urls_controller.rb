@@ -106,4 +106,33 @@ class UrlsController < ApplicationController
 
     redirect_to root_path, :error => "#{params[:admin_hash]} was not found."
   end
+
+  def admin
+    unless params[:hash] == ENV['ADMIN_URL']
+      redirect_to root_path and return
+    end
+
+    session[:admin_url] = params[:hash]
+    render 'urls/admin'
+  end
+
+  def info
+    if session[:admin_url].nil? or session[:admin_url] != ENV['ADMIN_URL']
+      respond_to do |format|
+        format.json { render :json => { :valid => false, :data => [] } }
+      end
+      return
+    end
+
+    allRecords = Url.all.to_a
+
+    json = {
+      :valid => true,
+      :data => allRecords
+    }
+
+    respond_to do |format|
+      format.json { render :json => json }
+    end
+  end
 end
