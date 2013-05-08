@@ -2,8 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(document).ready ->
+  adminPanelEl = document.getElementById('admin-panel')
+
   # Only do if admin-panel is on the page
-  if document.getElementById('admin-panel')
+  if adminPanelEl
      successCB = (response) ->
       if response.valid
         tableHeader = [
@@ -67,6 +69,6 @@ $(document).ready ->
         table = ['<table id="admin-table" class="table table-striped">', tableHeader.join(''), '<tbody>' , tablerowCollection.join('') , '</tbody>',  '</table>']
         $admin_panel.append(table.join(''))   # Get the admin information
       else
-        $('#admin-panel').append('<p>Cookie was bad I guess</p>')
+        $admin_panel.append('<p>Cookie was bad I guess</p>')
 
-    admininfo = $.get '/api/admininfo.json', successCB
+     admininfo = $.get '/api/admininfo.json', successCB

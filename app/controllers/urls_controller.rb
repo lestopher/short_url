@@ -23,8 +23,8 @@ class UrlsController < ApplicationController
     # Update times visited
     document.update_times_visited
 
-    # Redirect with a 301 status
-    redirect_to "#{protocol}#{document.full_url}", :status => 301 and return
+    @redirectLink = "#{protocol}#{document.full_url}"
+    render 'layouts/redirect', :layout => false
   end
 
   def show
@@ -108,6 +108,7 @@ class UrlsController < ApplicationController
   end
 
   def admin
+    puts "the hash is #{params[:hash]}\nenv is #{ENV['ADMIN_URL']}"
     unless params[:hash] == ENV['ADMIN_URL']
       redirect_to root_path and return
     end
