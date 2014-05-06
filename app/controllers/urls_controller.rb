@@ -52,6 +52,7 @@ class UrlsController < ApplicationController
     custom_url = !params[:custom_url].empty? ? params[:custom_url].downcase : Url.create_hashed_url(params[:url])
     msg        = Url.check_options(url, custom_url)
     site_name  = request.host_with_port
+    @url       = Url.new({full_url: url, hashed_url: custom_url})
 
     # Check if the custom url is banned
     if Url.is_banned?(custom_url)
@@ -72,9 +73,12 @@ class UrlsController < ApplicationController
       # Seriously, I need to use an else block here if there's an elsif
     end
 
-    url_obj = Url.create(full_url: url, hashed_url: custom_url)
-
-    redirect_to root_path, :notice => "Successfully created custom url: http://#{site_name}/#{custom_url}/nYour admin url is http://#{site_name}/urls/#{url_obj.admin_hash}/edit"
+    if verify_recaptcha(:model => @url, :message => "Wrong reCAPTCHA") && @url.save
+      redirect_to root_path, :notice => "Successfully created custom url: http://#{site_name}/#{custom_url}/nYour admin url is http://#{site_name}/urls/#{@url.admin_hash}/edit"
+    else
+      flash[:error] = @url.errors.full_messages.first
+      redirect_to root_path
+    end
   end
 
   def edit

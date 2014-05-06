@@ -1,7 +1,7 @@
 .col-xs-12
   - if flash[:error]
     %div.row
-      .alert.alert-error
+      .alert.alert-danger
         %a.close{ :data => { :dismiss => "alert" } }
           &times;
         = flash[:error]
@@ -29,6 +29,9 @@
             %label.checkbox{ :for => "force_cb" }
               = check_box_tag "force_cb"
               Force creation
+        .form-group
+          .col-xs-12.col-md-12
+            = recaptcha_tags
         .form-group
           .col-xs-12.col-md-12
             = submit_tag "Create!", :id => "submit-url-btn", :class => "btn btn-lg btn-info form-control"

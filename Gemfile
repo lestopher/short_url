@@ -50,3 +50,5 @@ gem 'newrelic_rpm'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'recaptcha', :require => 'recaptcha/rails'
