@@ -1,32 +1,38 @@
-- if flash[:error]
-  %div.row
-    .alert.alert-error
-      %a.close{ :data => { :dismiss => "alert" } }
-        &times;
-      = flash[:error]
+.col-xs-12
+  - if flash[:error]
+    %div.row
+      .alert.alert-error
+        %a.close{ :data => { :dismiss => "alert" } }
+          &times;
+        = flash[:error]
 
-- if flash[:notice]
-  %div.row
-    .alert.alert-success
-      %a.close{ :data => { :dismiss => "alert" } }
-        &times;
-      - flash[:notice].split(/\/n/).each do |m|
-        = m
-        %br
+  - if flash[:notice]
+    %div.row
+      .alert.alert-success
+        %a.close{ :data => { :dismiss => "alert" } }
+          &times;
+        - flash[:notice].split(/\/n/).each do |m|
+          = m
+          %br
 
-%div.row
-  .well.span4
-    = form_tag urls_path, :method => "post" do
-      = text_field_tag :url, nil, :placeholder => "Enter URL here (required)", :class => "input-xlarge"
-      %br
-      = text_field_tag :custom_url, nil, :placeholder => "Custom URL (optional)", :class => "input-xlarge"
-      %br
-      %label.checkbox{ :for => "force_cb"}
-        = check_box_tag "force_cb"
-        Force creation
-      %br
-      = submit_tag "Create!", :id => "submit-url-btn", :class => "btn btn-large btn-info"
-
-- if @records && !@records.empty?
   %div.row
-    = render 'urls/table_results'
+    .well.col-xs-12.col-md-6.col-md-offset-3
+      = form_tag urls_path, :method => "post", :class => "form-horizontal", :role => "form" do
+        .form-group
+          .col-xs-12.col-md-12
+            = text_field_tag :url, nil, :placeholder => "Enter URL here (required)", :class => "input-lg form-control"
+        .form-group
+          .col-xs-12.col-md-12
+            = text_field_tag :custom_url, nil, :placeholder => "Custom URL (optional)", :class => "input-lg form-control"
+        .form-group
+          .col-xs-12.col-md-12
+            %label.checkbox{ :for => "force_cb" }
+              = check_box_tag "force_cb"
+              Force creation
+        .form-group
+          .col-xs-12.col-md-12
+            = submit_tag "Create!", :id => "submit-url-btn", :class => "btn btn-lg btn-info form-control"
+
+  - if @records && !@records.empty?
+    %div.row
+      = render 'urls/table_results'

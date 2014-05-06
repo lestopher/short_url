@@ -1,8 +1,9 @@
-%div.row
-  %ul.nav.nav-pills
-    %li{:class => ('active' if current_controller == 'urls' && current_action == 'index')}
-      %a{:href => root_path}
-        Home
-    %li{:class => ('active' if current_controller == 'urls' && current_action == 'all')}
-      %a{:href => all_path}
-        List All URLs
+%div.row#header
+  .col-xs-12
+    %ul.nav.nav-pills
+      %li{:class => ('active' if current_controller == 'urls' && current_action == 'index')}
+        %a{:href => root_path}
+          Home
+      %li{:class => ('active' if current_controller == 'urls' && current_action == 'all')}
+        %a{:href => all_path}
+          List All URLs

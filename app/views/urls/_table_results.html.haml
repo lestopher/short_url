@@ -1,19 +1,20 @@
-%table.table.table-striped
-  %thead
-    %tr
-      %th
-        URL
-      %th
-        Custom URL
-      %th
-        Times Visited
-      %tbody
-        - @records.each do |r|
-          %tr
-            %td
-              = r.full_url
-            %td
-              %a{:href => root_path + r.hashed_url}
-                = r.hashed_url
-            %td 
-              = r.times_visited || 0
+.col-xs-12
+  %table.table.table-striped.table-responsive
+    %thead
+      %tr
+        %th
+          URL
+        %th
+          Custom URL
+        %th
+          Times Visited
+        %tbody
+          - @records.each do |r|
+            %tr
+              %td
+                = r.full_url
+              %td
+                %a{:href => root_path + r.hashed_url}
+                  = r.hashed_url
+              %td 
+                = r.times_visited || 0
